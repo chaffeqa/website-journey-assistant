@@ -830,14 +830,34 @@
         return
       }
 
+
       // Optionally expand a menu
+      let menuElement = null
       if (menuSelectorToExpand) {
-        const menuElement = document.querySelector(menuSelectorToExpand)
-        if (menuElement) {
-          menuElement.click()
-        } else {
-          console.warn(`Menu element not found: ${menuSelectorToExpand}`)
+        menuElement = document.querySelector(menuSelectorToExpand)
+      }
+      // if we do not have a specific menu selector to expand, try to find one:
+      if (!menuElement) {
+        // Traverse up through parent elements
+        let currentElement = element;
+        while (currentElement && currentElement !== document.body) {
+            // Find closest menu that needs expanding
+            const closestMenu = currentElement.closest('[role="menu"][aria-expanded="false"]');
+            if (closestMenu) {
+                // Get the control element that expands this menu using aria-labelledby
+                const labelId = closestMenu.getAttribute('aria-labelledby');
+                if (labelId) {
+                    menuElement = document.querySelector(`#${labelId}`)
+                    break;
+                }
+            }
+            currentElement = currentElement.parentElement;
         }
+      }
+      if (menuElement) {
+        menuElement.click()
+      } else if (menuSelectorToExpand) {
+        console.warn(`Menu element not found: ${menuSelectorToExpand}`)
       }
 
       // Get element position
