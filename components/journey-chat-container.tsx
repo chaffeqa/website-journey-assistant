@@ -47,7 +47,7 @@ export function JourneyChatContainer() {
     const initialize = async () => {
       try {
         const initData = await waitForInitialization()
-        console.log("Initialization data received:", initData)
+        // console.log("Initialization data received:", initData)
         setApiKey(initData.apiKey || null)
         setAgentAdditionalInformation(initData.agentAdditionalInformation)
         setIsInitialized(true)
@@ -66,7 +66,7 @@ export function JourneyChatContainer() {
       const { type, data } = event.data;
       
       if (type === MESSAGE_EVENT_TYPES.NAVIGATION_EVENT) {
-        console.log("Navigation event received:", data)
+        // console.log("Navigation event received:", data)
         // Store URL and title for context
         if (data) {
           setCurrentUrl(data.url || null)
@@ -74,8 +74,8 @@ export function JourneyChatContainer() {
           setCurrentHtml(data.html || null)
         }
         clearHighlight()
-        console.log(`Current URL: ${data.url}, last messages:`)
-        console.dir(messagesRef.current)
+        // console.log(`Current URL: ${data.url}, last messages:`)
+        // console.dir(messagesRef.current)
         // find the last user message and use it as context
         const lastUserMessage = messagesRef.current.slice().reverse().find((msg) => msg.role === "user")
 
@@ -132,7 +132,7 @@ export function JourneyChatContainer() {
           // ])
         }
       } else if (type === MESSAGE_EVENT_TYPES.NOTIFY_OF_COMPLETION) {
-        console.log("Completion event received:", data)
+        // console.log("Completion event received:", data)
         // Notify the user of completion
         setMessages(() => [
           {
