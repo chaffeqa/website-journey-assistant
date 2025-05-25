@@ -12,6 +12,7 @@ import { analyzeHtmlWithAI } from "@/lib/client-ai-analyzer"
 import { MESSAGE_EVENT_TYPES } from "@/lib/message-types"
 import { highlightElement, getCurrentHtml, clearHighlight } from "@/lib/parent-communication"
 import { USER_AVATAR_URL, AI_AVATAR_URL } from "@/lib/utils"
+import { ApiKeyPrompt } from "./ui/api-key-prompt"
 
 type ChatMessage = {
   role: "user" | "assistant"
@@ -47,7 +48,7 @@ export function JourneyChatContainer() {
       try {
         const initData = await waitForInitialization()
         console.log("Initialization data received:", initData)
-        setApiKey(initData.apiKey || process.env.NEXT_PUBLIC_GOOGLE_GENERATIVE_AI_API_KEY || null)
+        setApiKey(initData.apiKey || null)
         setAgentAdditionalInformation(initData.agentAdditionalInformation)
         setIsInitialized(true)
       } catch (error) {
@@ -229,6 +230,10 @@ export function JourneyChatContainer() {
         </div>
       </Card>
     )
+  }
+
+  if (!apiKey) {
+    return <ApiKeyPrompt onSubmit={(newApiKey) => setApiKey(newApiKey)} />
   }
 
   return (
