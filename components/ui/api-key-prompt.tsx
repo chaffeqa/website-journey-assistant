@@ -41,7 +41,8 @@ export function ApiKeyPrompt({ onSubmit }: ApiKeyPromptProps) {
         
         <div className="space-y-2">
           <Input
-            type="password"
+            type="text"
+            aria-label="Gemini API Key"
             placeholder="Enter your API key"
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
