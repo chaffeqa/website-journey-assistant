@@ -24,7 +24,7 @@
     borderRadius: "8px",
     zIndex: 9999,
     onCloseCallback: null,
-    assistantUrl: null,
+    assistantUrl: "https://v0-web-tooltip-journey-assistant.vercel.app",
     geminiApiKey: null,
     agentAdditionalInformation: null,
     getCurrentHtml: null, // Function to get current HTML, if not provided uses document.documentElement.outerHTML

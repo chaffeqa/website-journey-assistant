@@ -58,18 +58,13 @@ This version of the Web Journey Assistant makes AI API calls directly from the b
 
 ### 2. Integrate with Your Website
 
-Add the following script to your website:
+You can activate the assistant any way you desire:
 
 ```html
-<!-- Add this near the end of your body tag -->
-<script src="https://your-assistant-domain.com/parent-script.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    if (window.JourneyAssistant) {
-      window.JourneyAssistant.init();
-    }
-  });
-</script>
+<!-- load the SDK -->
+<script src="https://v0-web-tooltip-journey-assistant.vercel.app/parent-script.js" defer></script>
+<!-- Activate the Assistant on interaction -->
+<button type="button" onclick='window.JourneyAssistant.init()'>Ask an Assistant</button>
 ```
 
 ### 3. User Setup
@@ -84,11 +79,11 @@ When users interact with the chatbot, they will need to:
 
 This implementation has the following privacy and security characteristics:
 
-- **User-Provided API Keys**: Each user must provide their own API key
-- **Local Storage**: API keys are stored in the browser's local storage
+- **AI API Keys**: Choose to either supply an API key or have a User enter one
 - **Client-Side Processing**: All AI API calls are made directly from the browser
 - **User-Initiated Analysis**: The assistant only sends page content to the AI when a user explicitly asks for help
 - **No Server Storage**: No data is stored on any server
+- **PII Control**: You can scrub any of the information sent to the AI agent
 
 ## Advanced Configuration
 
@@ -103,6 +98,7 @@ window.JourneyAssistant.init({
   height: '500px',
   borderRadius: '8px',
   zIndex: 9999,
+  assistantUrl: "http://localhost:3000",
   onCloseCallback: () => {},
   geminiApiKey: "...",
   agentAdditionalInformation: "...",
