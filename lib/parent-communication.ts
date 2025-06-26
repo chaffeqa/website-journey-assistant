@@ -82,6 +82,7 @@ export function clearHighlight() {
     },
     "*",
   )
+  return returnOnNextTick(true)
 }
 
 // Function to highlight an element in the parent window
@@ -97,4 +98,13 @@ export function highlightElement(selector: string, description?: string, menuSel
     },
     "*",
   )
+  return returnOnNextTick(true)
+}
+
+function returnOnNextTick<T>(value: T): Promise<T> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(value)
+    }, 0)
+  })
 }
