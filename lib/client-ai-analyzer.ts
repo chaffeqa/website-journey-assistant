@@ -75,7 +75,7 @@ ${agentAdditionalInformation ? `\n\nAdditional Information:\n${agentAdditionalIn
 
     // Call the AI model using Gemini directly from the client
     const { text } = await generateText({
-      model: google("models/gemini-2.5-flash-preview-05-20"),
+      model: google("models/gemini-flash-lite-latest"),
       prompt,
       system: systemPrompt,
     })
